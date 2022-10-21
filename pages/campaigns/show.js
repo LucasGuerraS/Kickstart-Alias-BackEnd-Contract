@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card } from "semantic-ui-react";
+import { Card, Grid } from "semantic-ui-react";
 import Layout from "../../components/Layout";
 import createContract from "../../ethereum/campaign";
 import web3 from "../../ethereum/web3";
@@ -35,28 +35,31 @@ class CampaignShow extends Component {
         meta: "Address of the manager",
         description:
           "The manager created this campaign and can create requests to withdraw money",
-        style: {overflowWrap: "break-word"}
+        style: { overflowWrap: "break-word" },
       },
       {
         header: minimumContribution,
         meta: "Minimum Contribution (Wei)",
-        description: "You must contribute at least this much wei to beacome an approver"
+        description:
+          "You must contribute at least this much wei to beacome an approver",
       },
       {
         header: requestsCount,
         meta: "Number of Requests",
-        description: "A request tries to withdraw money from the contract. Requests must be approved by more than 50% of the approvers"
-      }, 
+        description:
+          "A request tries to withdraw money from the contract. Requests must be approved by more than 50% of the approvers",
+      },
       {
         header: approversCount,
         meta: "Number of approvers",
-        description: "Number of people who have contributed to this campaign"
+        description: "Number of people who have contributed to this campaign",
       },
       {
         header: web3.utils.fromWei(balance, "ether"),
         meta: "Campaign Balance (ether)",
-        description: "The balance is how much money this campaign has left to spend"
-      }
+        description:
+          "The balance is how much money this campaign has left to spend",
+      },
     ];
 
     return <Card.Group items={items} />;
@@ -66,8 +69,12 @@ class CampaignShow extends Component {
     return (
       <Layout>
         <h3>Campaign show</h3>
-        {this.renderCards()}
-        <ContributeForm />
+        <Grid>
+          <Grid.Column width={10}>{this.renderCards()}</Grid.Column>
+          <Grid.Column width={6}>
+            <ContributeForm />
+          </Grid.Column>
+        </Grid>
       </Layout>
     );
   }
